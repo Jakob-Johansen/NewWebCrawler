@@ -12,7 +12,6 @@ namespace NewWebCrawler
     public class Crawler
     {
         private readonly string _link;
-        private readonly HttpClient client = new();
 
         public Crawler(string link)
         {
@@ -24,6 +23,7 @@ namespace NewWebCrawler
             Console.ForegroundColor = ConsoleColor.Green;
             Console.WriteLine("Start\n");
             Console.ResetColor();
+
 
             var browser = await Puppeteer.LaunchAsync(new LaunchOptions{ Headless = false, });
             var page = await browser.NewPageAsync();

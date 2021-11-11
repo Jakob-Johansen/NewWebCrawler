@@ -32,6 +32,7 @@ namespace NewWebCrawler
             await browser.CloseAsync();
         }
 
+        // Checking if chromium is installed, if not it will install it.
         public async Task CheckChromiumBrowser()
         {
             var browserFetcher = Puppeteer.CreateBrowserFetcher(new BrowserFetcherOptions());

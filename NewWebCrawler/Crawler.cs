@@ -31,11 +31,10 @@ namespace NewWebCrawler
             await browser.CloseAsync();
         }
 
-        // Checking if chromium is installed, if not it will install it.
+        // Checking if chromium is installed, if not it will install it + showing progress in percentage.
         public async Task CheckChromiumBrowser()
         {
             int progressNumber = 0;
-
             var rdmNumber = new Random();
 
             var browserFetcher = Puppeteer.CreateBrowserFetcher(new BrowserFetcherOptions());
@@ -47,8 +46,11 @@ namespace NewWebCrawler
                 Console.WriteLine("Checking for Chromium");
                 Thread.Sleep(1000);
                 Console.WriteLine("Installing chromium please wait...");
+
+                // Downloads Chromium in the background. Doing this so the progress bar/number can be shown in the console at the same time.
                 var bfDownload = browserFetcher.DownloadAsync(BrowserFetcher.DefaultChromiumRevision).ConfigureAwait(true).GetAwaiter();
 
+                // Outputs progress in percentages in console.
                 while (progressNumber <= 100)
                 {
                     Console.Write($"\rProgress: {progressNumber}%");

@@ -24,7 +24,6 @@ namespace NewWebCrawler
             Console.WriteLine("Start\n");
             Console.ResetColor();
 
-
             var browser = await Puppeteer.LaunchAsync(new LaunchOptions{ Headless = false, });
             var page = await browser.NewPageAsync();
             await page.GoToAsync(_link);
@@ -35,28 +34,46 @@ namespace NewWebCrawler
         // Checking if chromium is installed, if not it will install it.
         public async Task CheckChromiumBrowser()
         {
+            int progressNumber = 0;
+
+            var rdmNumber = new Random();
+
             var browserFetcher = Puppeteer.CreateBrowserFetcher(new BrowserFetcherOptions());
             var revisionInfo = await browserFetcher.GetRevisionInfoAsync();
 
-            Console.ForegroundColor = ConsoleColor.Yellow;
-            Console.WriteLine("Checking for installed chromium\n");
-
-            if (!revisionInfo.Downloaded)
+            if (!revisionInfo.Local)
             {
-                Console.WriteLine("Installing chromium please wait.\n");
-                await browserFetcher.DownloadAsync(BrowserFetcher.DefaultChromiumRevision);
-                Console.Write("Done\n");
+                Console.ForegroundColor = ConsoleColor.Yellow;
+                Console.WriteLine("Checking for Chromium");
+                Thread.Sleep(1000);
+                Console.WriteLine("Installing chromium please wait...");
+                var bfDownload = browserFetcher.DownloadAsync(BrowserFetcher.DefaultChromiumRevision).ConfigureAwait(true).GetAwaiter();
+
+                while (progressNumber <= 100)
+                {
+                    Console.Write($"\rProgress: {progressNumber}%");
+
+                    if (!bfDownload.IsCompleted && progressNumber <= 73)
+                    {
+                        progressNumber++;
+                        Thread.Sleep(rdmNumber.Next(15, 500));
+                    }
+                    else if (bfDownload.IsCompleted && progressNumber <= 100)
+                    {
+                        progressNumber++;
+                        Thread.Sleep(10);
+                    }
+                }
+
+                Console.ForegroundColor = ConsoleColor.Green;
+                Console.WriteLine("\n\nDone");
+
+                Console.ResetColor();
+
+                Thread.Sleep(1300);
+
+                Console.Clear();
             }
-            else
-            {
-                Console.WriteLine("Chromium is already installed, the crawler will start soon\n");
-            }
-            Console.ResetColor();
-
-            Thread.Sleep(3000);
-
-            Console.Clear();
-
             await LoadCrawlerAsync();
         }
     }

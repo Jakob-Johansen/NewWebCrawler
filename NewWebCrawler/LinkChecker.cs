@@ -11,18 +11,14 @@ namespace NewWebCrawler
     {
         public static void CheckUrl(string url)
         {
-
             List<string> urlSplit = new();
             url = url.Trim().ToLower();
 
             // (?=[.])
             string pattern = @"([.])\b";
+            urlSplit = Regex.Split(url, pattern).ToList();
 
-            string[] substrings = Regex.Split(url, pattern);
-
-            urlSplit = url.Split(".").ToList();
-
-            foreach (var item in substrings)
+            foreach (var item in urlSplit)
             {
                 Console.WriteLine(item);
             }

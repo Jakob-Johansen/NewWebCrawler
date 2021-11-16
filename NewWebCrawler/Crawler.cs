@@ -12,15 +12,17 @@ namespace NewWebCrawler
     public class Crawler
     {
 
-        private readonly string _link;
+        private readonly string _url;
 
-        public Crawler(string link)
+        public Crawler(string url)
         {
-            _link = link;
+            _url = url;
         }
 
         public async Task StartProgram()
         {
+
+
             ChromiumCheck chromiumCheck = new();
             await chromiumCheck.CheckChromiumBrowser();
 
@@ -35,7 +37,7 @@ namespace NewWebCrawler
 
             var browser = await Puppeteer.LaunchAsync(new LaunchOptions{ Headless = false, });
             var page = await browser.NewPageAsync();
-            await page.GoToAsync(_link);
+            await page.GoToAsync(_url);
             Console.ReadLine();
             await browser.CloseAsync();
         }

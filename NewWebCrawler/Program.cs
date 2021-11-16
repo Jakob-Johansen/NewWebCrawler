@@ -25,8 +25,10 @@ namespace NewWebCrawler
             // https://www.skousen.dk/
             // https://www.xl-byg.dk/
 
-            Crawler crawler = new("https://www.google.dk/");
-            await crawler.StartProgram();
+            //Crawler crawler = new("https://www.google.dk/");
+            //await crawler.StartProgram();
+
+            LinkChecker.CheckUrl("https://docs.microsoft.com/en-us/dotnet/csharp/programming-guide/classes-and-structs/using-constructors");
         }
     }
 }

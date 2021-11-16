@@ -26,7 +26,7 @@ namespace NewWebCrawler
             // https://www.xl-byg.dk/
 
             Crawler crawler = new("https://www.google.dk/");
-            await crawler.CheckChromiumBrowser();
+            await crawler.StartProgram();
         }
     }
 }

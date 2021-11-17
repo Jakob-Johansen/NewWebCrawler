@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Net.Http;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
@@ -17,6 +18,8 @@ namespace NewWebCrawler
 
     public class LinkChecker
     {
+        static readonly HttpClient client = new();
+
         public static bool UrlValidate(string url)
         {
             url = url.Trim().ToLower();
@@ -33,6 +36,25 @@ namespace NewWebCrawler
                 return false;
             }
             return true;
+        }
+
+        public static async Task UrlCheck()
+        {
+
+            // Lav så den laver et split så man kan se om linket er https eller http.
+
+            try
+            {
+                HttpResponseMessage responseMessage = await client.GetAsync("https://www.google.dk");
+                if (responseMessage.StatusCode.ToString() == "OK")
+                    Console.WriteLine("Yay");
+                else
+                    Console.WriteLine("Nay");
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
         }
     }
 }

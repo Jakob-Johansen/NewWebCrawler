@@ -28,7 +28,7 @@ namespace NewWebCrawler
             //Crawler crawler = new("https://www.google.dk/");
             //await crawler.StartProgram();
 
-            LinkChecker.TestLinkFilter();
+            LinkChecker.UrlValidate();
         }
     }
 }

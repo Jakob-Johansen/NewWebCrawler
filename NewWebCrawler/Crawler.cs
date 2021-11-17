@@ -11,7 +11,6 @@ namespace NewWebCrawler
 {
     public class Crawler
     {
-
         private readonly string _url;
 
         public Crawler(string url)
@@ -21,11 +20,7 @@ namespace NewWebCrawler
 
         public async Task StartProgram()
         {
-
-
-            ChromiumCheck chromiumCheck = new();
-            await chromiumCheck.CheckChromiumBrowser();
-
+            await ChromiumCheck.CheckChromiumBrowser();
             await LoadCrawlerAsync();
         }
 
@@ -34,6 +29,14 @@ namespace NewWebCrawler
             Console.ForegroundColor = ConsoleColor.Green;
             Console.WriteLine("Start\n");
             Console.ResetColor();
+
+            bool urlValidateBool = LinkChecker.UrlValidate(_url);
+
+            // if false
+            if (!urlValidateBool)
+            {
+                return;
+            }
 
             var browser = await Puppeteer.LaunchAsync(new LaunchOptions{ Headless = false, });
             var page = await browser.NewPageAsync();

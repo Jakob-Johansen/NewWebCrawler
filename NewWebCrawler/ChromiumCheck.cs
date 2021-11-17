@@ -10,13 +10,12 @@ namespace NewWebCrawler
 {
     public class ChromiumCheck
     {
-
         public ChromiumCheck()
         {
         }
 
         // Checking if chromium is installed, if not it will install it + showing progress in percentage.
-        public async Task CheckChromiumBrowser()
+        public static async Task CheckChromiumBrowser()
         {
             int progressNumber = 0;
             var rdmNumber = new Random();

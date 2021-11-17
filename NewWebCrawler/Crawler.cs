@@ -38,11 +38,13 @@ namespace NewWebCrawler
                 return;
             }
 
-            var browser = await Puppeteer.LaunchAsync(new LaunchOptions{ Headless = false, });
-            var page = await browser.NewPageAsync();
-            await page.GoToAsync(_url);
-            Console.ReadLine();
-            await browser.CloseAsync();
+            await LinkChecker.UrlCheck();
+
+            //var browser = await Puppeteer.LaunchAsync(new LaunchOptions{ Headless = false, });
+            //var page = await browser.NewPageAsync();
+            //await page.GoToAsync(_url);
+            //Console.ReadLine();
+            //await browser.CloseAsync();
         }
     }
 }

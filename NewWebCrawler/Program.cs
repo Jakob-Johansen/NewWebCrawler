@@ -12,6 +12,7 @@ namespace NewWebCrawler
             // https://www.apple.com/
             // https://www.proshop.dk/
             // http://monosoft.dk/
+            // https://docs.microsoft.com/en-us/dotnet/csharp/programming-guide/classes-and-structs/using-constructors
 
             // Javascript side
             // https://madfaerd.org/
@@ -25,10 +26,8 @@ namespace NewWebCrawler
             // https://www.skousen.dk/
             // https://www.xl-byg.dk/
 
-            //Crawler crawler = new("https://www.google.dk/");
-            //await crawler.StartProgram();
-
-            LinkChecker.UrlValidate();
+            Crawler crawler = new("https://docs.microsoft.com/en-us/dotnet/csharp/programming-guide/classes-and-structs/using-constructors");
+            await crawler.StartProgram();
         }
     }
 }

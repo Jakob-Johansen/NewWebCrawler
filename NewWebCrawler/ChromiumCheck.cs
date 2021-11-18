@@ -20,9 +20,12 @@ namespace NewWebCrawler
             int progressNumber = 0;
             var rdmNumber = new Random();
 
+            // creates a variable that create a BrowserFetcher, that can be used to fx. install chromium.
             var browserFetcher = Puppeteer.CreateBrowserFetcher(new BrowserFetcherOptions());
+            // Creates a variable that contains info about the newest chromium version.
             var revisionInfo = await browserFetcher.GetRevisionInfoAsync();
 
+            // Checks if chromium is already installed.
             if (!revisionInfo.Local)
             {
                 Console.ForegroundColor = System.ConsoleColor.Yellow;

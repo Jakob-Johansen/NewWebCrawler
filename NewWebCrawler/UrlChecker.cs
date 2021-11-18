@@ -17,7 +17,7 @@ namespace NewWebCrawler
     // Regex.Split(url, @"([.])\b).ToList(); //
     // ------------------------------------- //
 
-    public class LinkChecker
+    public class UrlChecker
     {
         static readonly HttpClient client = new();
 
@@ -31,17 +31,20 @@ namespace NewWebCrawler
                 return false;
             }
 
+            // Creates an array and splits the url where it contains (https://, http:// or /) and adds the array. It also removes empty entries. 
             string[] urlSplitArray;
-
             urlSplitArray = url.Split(new[] { "https://", "http://", "/" }, StringSplitOptions.RemoveEmptyEntries);
 
+            // Gets the extension of the first string in the array.
             string getExtension = Path.GetExtension(urlSplitArray[0]);
 
-            if (getExtension != null && getExtension.Length != 0)
+            // Checks if the extension isn't null and the extension lenght is greater than 0.
+            if (getExtension != null && getExtension.Length > 0)
             {
                 ConsoleColor.GreenColor("Done.");
                 return true;
             }
+
             ConsoleColor.RedColor("The url Is not a website url.");
             return false;
         }
@@ -51,6 +54,7 @@ namespace NewWebCrawler
             ConsoleColor.YellowColor("Checking if the website is status 200 (OK).");
             try
             {
+                // Checks if the HttpStatusCode is 200 (OK).
                 HttpResponseMessage responseMessage = await client.GetAsync(url);
                 if (responseMessage.StatusCode == HttpStatusCode.OK)
                 {

@@ -22,10 +22,13 @@ namespace NewWebCrawler
 
         public async Task StartProgram()
         {
+            // Runs a method that checks if chromium is installed, if not then it will install it.
             await ChromiumCheck.CheckChromiumBrowser();
 
-            bool urlValidateBool = LinkChecker.UrlValidate(_url);
-            bool urlCheckerBool = await LinkChecker.UrlCheck(_url);
+            // Checks if the url is a real url.
+            bool urlValidateBool = UrlChecker.UrlValidate(_url);
+            // Checks the if the HttpStatusCode is 200 (OK).
+            bool urlCheckerBool = await UrlChecker.UrlCheck(_url);
 
             // if false
             if (!urlValidateBool || !urlCheckerBool)
@@ -36,25 +39,28 @@ namespace NewWebCrawler
 
         public async Task StartCrawl()
         {
+            // If false
             if (!_isBrowserRunning)
             {
+                // Opens a chromium broser;
                 _browser = await Puppeteer.LaunchAsync(new LaunchOptions { Headless = false });
                 _isBrowserRunning = true;
             }
+
+            // Opens a new page in the chromium browser
             var page = await _browser.NewPageAsync();
+            
+            // Searching for the inputted url.
             await page.GoToAsync(_url);
 
-            // Crawl a tags here.
+
+            // Crawl a tags here...
 
 
+            // Closes the chromium browser page.
             await page.CloseAsync();
-            return;
 
-            //var browser = await Puppeteer.LaunchAsync(new LaunchOptions{ Headless = false, });
-            //var page = await browser.NewPageAsync();
-            //await page.GoToAsync(_url);
-            //Console.ReadLine();
-            //await browser.CloseAsync();
+            return;
         }
     }
 }

@@ -26,17 +26,11 @@ namespace NewWebCrawler
 
         public async Task LoadCrawlerAsync()
         {
-            ConsoleColor.GreenColor("Start\n");
-
-            bool urlValidateBool = LinkChecker.UrlValidate(_url);
+            bool urlValidateAndCheckBool = await LinkChecker.UrlValidate(_url);
 
             // if false
-            if (!urlValidateBool)
-            {
+            if (!urlValidateAndCheckBool)
                 return;
-            }
-
-            await LinkChecker.UrlCheck(_url);
 
             //var browser = await Puppeteer.LaunchAsync(new LaunchOptions{ Headless = false, });
             //var page = await browser.NewPageAsync();

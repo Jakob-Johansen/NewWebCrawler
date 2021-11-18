@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Net;
 using System.Net.Http;
 using System.Text;
 using System.Text.RegularExpressions;
@@ -20,7 +21,7 @@ namespace NewWebCrawler
     {
         static readonly HttpClient client = new();
 
-        public static async Task<bool> UrlValidate(string url)
+        public static bool UrlValidate(string url)
         {
             ConsoleColor.YellowColor("Checking if the url is valid.");
 
@@ -39,7 +40,7 @@ namespace NewWebCrawler
             if (getExtension != null && getExtension.Length != 0)
             {
                 ConsoleColor.GreenColor("Done.");
-                return await UrlCheck(url);
+                return true;
             }
             ConsoleColor.RedColor("The url Is not a website url.");
             return false;
@@ -51,7 +52,7 @@ namespace NewWebCrawler
             try
             {
                 HttpResponseMessage responseMessage = await client.GetAsync(url);
-                if (responseMessage.StatusCode.ToString() == "OK")
+                if (responseMessage.StatusCode == HttpStatusCode.OK)
                 {
                     ConsoleColor.GreenColor("Done");
                     return true;

@@ -29,7 +29,7 @@ namespace NewWebCrawler
 
             // Remember to check trello.
 
-            Crawler crawler = new("google.com");
+            Crawler crawler = new("https://www.proshop.dk/");
             await crawler.StartProgram();
         }
     }

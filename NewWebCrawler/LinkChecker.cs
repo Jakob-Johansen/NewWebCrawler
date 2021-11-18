@@ -22,7 +22,11 @@ namespace NewWebCrawler
 
         public static bool UrlValidate(string url)
         {
-            url = url.Trim().ToLower();
+            if (url == null || url.Length == 0)
+            {
+                ConsoleColor.RedColor("NO URL FOUND!");
+                return false;
+            }
 
             string[] urlSplitArray;
 
@@ -32,20 +36,17 @@ namespace NewWebCrawler
 
             if (getExtension == null || getExtension.Length == 0)
             {
-                Console.WriteLine("Is not a website url.");
+                ConsoleColor.RedColor("The url Is not a website url.");
                 return false;
             }
             return true;
         }
 
-        public static async Task UrlCheck()
+        public static async Task UrlCheck(string url)
         {
-
-            // Lav så den laver et split så man kan se om linket er https eller http.
-
             try
             {
-                HttpResponseMessage responseMessage = await client.GetAsync("https://www.google.dk");
+                HttpResponseMessage responseMessage = await client.GetAsync(url);
                 if (responseMessage.StatusCode.ToString() == "OK")
                     Console.WriteLine("Yay");
                 else
@@ -53,7 +54,7 @@ namespace NewWebCrawler
             }
             catch (Exception ex)
             {
-                Console.WriteLine(ex.Message);
+                ConsoleColor.RedColor(ex.Message);
             }
         }
     }

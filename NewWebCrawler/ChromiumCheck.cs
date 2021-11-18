@@ -22,6 +22,7 @@ namespace NewWebCrawler
 
             // creates a variable that create a BrowserFetcher, that can be used to fx. install chromium.
             var browserFetcher = Puppeteer.CreateBrowserFetcher(new BrowserFetcherOptions());
+
             // Creates a variable that contains info about the newest chromium version.
             var revisionInfo = await browserFetcher.GetRevisionInfoAsync();
 

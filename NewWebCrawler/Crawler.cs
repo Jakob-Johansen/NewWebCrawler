@@ -27,6 +27,7 @@ namespace NewWebCrawler
 
             // Checks if the url is a real url.
             bool urlValidateBool = UrlChecker.UrlValidate(_url);
+
             // Checks the if the HttpStatusCode is 200 (OK).
             bool urlCheckerBool = await UrlChecker.UrlCheck(_url);
 

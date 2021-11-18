@@ -15,7 +15,7 @@ namespace NewWebCrawler
 
         public Crawler(string url)
         {
-            _url = url;
+            _url = url.Trim().ToLower();
         }
 
         public async Task StartProgram()
@@ -26,7 +26,7 @@ namespace NewWebCrawler
 
         public async Task LoadCrawlerAsync()
         {
-            Console.ForegroundColor = ConsoleColor.Green;
+            Console.ForegroundColor = System.ConsoleColor.Green;
             Console.WriteLine("Start\n");
             Console.ResetColor();
 
@@ -38,7 +38,7 @@ namespace NewWebCrawler
                 return;
             }
 
-            await LinkChecker.UrlCheck();
+            await LinkChecker.UrlCheck(_url);
 
             //var browser = await Puppeteer.LaunchAsync(new LaunchOptions{ Headless = false, });
             //var page = await browser.NewPageAsync();

@@ -25,7 +25,7 @@ namespace NewWebCrawler
 
             if (!revisionInfo.Local)
             {
-                Console.ForegroundColor = ConsoleColor.Yellow;
+                Console.ForegroundColor = System.ConsoleColor.Yellow;
                 Console.WriteLine("Checking for Chromium");
                 Thread.Sleep(1000);
                 Console.WriteLine("Installing chromium please wait...");
@@ -50,7 +50,7 @@ namespace NewWebCrawler
                     }
                 }
 
-                Console.ForegroundColor = ConsoleColor.Green;
+                Console.ForegroundColor = System.ConsoleColor.Green;
                 Console.WriteLine("\n\nDone");
 
                 Console.ResetColor();

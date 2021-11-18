@@ -8,10 +8,11 @@ namespace NewWebCrawler
         // WebCrawler
         static async Task Main(string[] args)
         {
+            // Some websites to test on.
+
             // https://www.automobile.tn/
             // https://www.apple.com/
             // https://www.proshop.dk/
-            // http://monosoft.dk/
             // https://docs.microsoft.com/en-us/dotnet/csharp/programming-guide/classes-and-structs/using-constructors
 
             // Javascript side
@@ -26,7 +27,9 @@ namespace NewWebCrawler
             // https://www.skousen.dk/
             // https://www.xl-byg.dk/
 
-            Crawler crawler = new("https://docs.microsoft.com/en-us/dotnet/csharp/programming-guide/classes-and-structs/using-constructors");
+            // Remember to check trello.
+
+            Crawler crawler = new("www.google.com");
             await crawler.StartProgram();
         }
     }

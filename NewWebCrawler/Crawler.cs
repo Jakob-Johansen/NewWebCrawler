@@ -26,9 +26,7 @@ namespace NewWebCrawler
 
         public async Task LoadCrawlerAsync()
         {
-            Console.ForegroundColor = System.ConsoleColor.Green;
-            Console.WriteLine("Start\n");
-            Console.ResetColor();
+            ConsoleColor.GreenColor("Start\n");
 
             bool urlValidateBool = LinkChecker.UrlValidate(_url);
 

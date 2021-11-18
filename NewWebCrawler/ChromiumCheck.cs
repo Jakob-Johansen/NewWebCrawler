@@ -50,10 +50,7 @@ namespace NewWebCrawler
                     }
                 }
 
-                Console.ForegroundColor = System.ConsoleColor.Green;
-                Console.WriteLine("\n\nDone");
-
-                Console.ResetColor();
+                ConsoleColor.GreenColor("\n\nDone");
 
                 Thread.Sleep(1300);
 

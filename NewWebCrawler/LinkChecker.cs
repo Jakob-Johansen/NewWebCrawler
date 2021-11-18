@@ -20,8 +20,10 @@ namespace NewWebCrawler
     {
         static readonly HttpClient client = new();
 
-        public static bool UrlValidate(string url)
+        public static async Task<bool> UrlValidate(string url)
         {
+            ConsoleColor.YellowColor("Checking if the url is valid.");
+
             if (url == null || url.Length == 0)
             {
                 ConsoleColor.RedColor("NO URL FOUND!");
@@ -30,31 +32,40 @@ namespace NewWebCrawler
 
             string[] urlSplitArray;
 
-            urlSplitArray = url.Split(new [] { "https://", "http://", "/" }, StringSplitOptions.RemoveEmptyEntries);
+            urlSplitArray = url.Split(new[] { "https://", "http://", "/" }, StringSplitOptions.RemoveEmptyEntries);
 
             string getExtension = Path.GetExtension(urlSplitArray[0]);
 
-            if (getExtension == null || getExtension.Length == 0)
+            if (getExtension != null && getExtension.Length != 0)
             {
-                ConsoleColor.RedColor("The url Is not a website url.");
-                return false;
+                ConsoleColor.GreenColor("Done.");
+                return await UrlCheck(url);
             }
-            return true;
+            ConsoleColor.RedColor("The url Is not a website url.");
+            return false;
         }
 
-        public static async Task UrlCheck(string url)
+        public static async Task<bool> UrlCheck(string url)
         {
+            ConsoleColor.YellowColor("Checking if the website is status 200 (OK).");
             try
             {
                 HttpResponseMessage responseMessage = await client.GetAsync(url);
                 if (responseMessage.StatusCode.ToString() == "OK")
-                    Console.WriteLine("Yay");
+                {
+                    ConsoleColor.GreenColor("Done");
+                    return true;
+                }
                 else
-                    Console.WriteLine("Nay");
+                {
+                    ConsoleColor.RedColor("The website status is not 200 (OK).");
+                    return false;
+                }
             }
             catch (Exception ex)
             {
                 ConsoleColor.RedColor(ex.Message);
+                return false;
             }
         }
     }

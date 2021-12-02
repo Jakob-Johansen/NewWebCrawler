@@ -23,7 +23,7 @@ namespace NewWebCrawler
 
         public static bool UrlValidate(string url)
         {
-            ConsoleColor.YellowColor("Checking if the url is valid.");
+            //ConsoleColor.YellowColor("Checking if the url is valid.");
 
             if (url == null || url.Length == 0)
             {
@@ -41,7 +41,7 @@ namespace NewWebCrawler
             // Checks if the extension isn't null and the extension lenght is greater than 0.
             if (getExtension != null && getExtension.Length > 0)
             {
-                ConsoleColor.GreenColor("Done.");
+                //ConsoleColor.GreenColor("Done.");
                 return true;
             }
 
@@ -49,16 +49,16 @@ namespace NewWebCrawler
             return false;
         }
 
-        public static async Task<bool> UrlCheck(string url)
+        public static async Task<bool> UrlStatusCheck(string url)
         {
-            ConsoleColor.YellowColor("Checking if the website is status 200 (OK).");
+            //ConsoleColor.YellowColor("Checking if the website is status 200 (OK).");
             try
             {
                 // Checks if the HttpStatusCode is 200 (OK).
                 HttpResponseMessage responseMessage = await client.GetAsync(url);
                 if (responseMessage.StatusCode == HttpStatusCode.OK)
                 {
-                    ConsoleColor.GreenColor("Done");
+                    //ConsoleColor.GreenColor("Done");
                     return true;
                 }
                 else

@@ -29,8 +29,11 @@ namespace NewWebCrawler
 
             // Remember to check trello.
 
-            Crawler crawler = new("https://www.proshop.dk/");
-            await crawler.StartProgram();
+            //Crawler crawler = new("https://www.proshop.dk/");
+            //await crawler.StartProgram();
+
+            FileOperations fo = new();
+            await fo.SaveToFile();
         }
     }
 }

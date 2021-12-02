@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -16,14 +15,17 @@ namespace NewWebCrawler
         public FileOperations()
         {
             // Gets the path of the currentDirectory then trims the path. Fx C:\Users\NAME\source\repos\NewWebCrawler\NewWebCrawler. 
-            _trimmedPath = Directory.GetParent(Environment.CurrentDirectory).Parent.Parent.FullName;
-
+            _trimmedPath = Directory.GetParent(Directory.GetCurrentDirectory()).Parent.Parent.FullName;
             _directoryPath = _trimmedPath + @"\SaveFiles";
             _filePath = _directoryPath + @"\Links.txt";
         }
-        public void SaveToFile()
+        public async Task SaveToFile()
         {
             CheckDirAndFileExists();
+
+            // Adding text to the file.
+            using StreamWriter sw = new(_filePath, append: true);
+            await sw.WriteLineAsync("Test");
         }
 
         public void CheckDirAndFileExists()
@@ -37,7 +39,7 @@ namespace NewWebCrawler
 
                 if (!File.Exists(_filePath))
                 {
-                    File.Create(_filePath);
+                    File.Create(_filePath).Close();
                 }
             }
             catch (Exception ex)

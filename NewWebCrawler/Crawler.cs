@@ -27,13 +27,17 @@ namespace NewWebCrawler
 
             // Checks if the url is a real url.
             bool urlValidateBool = UrlChecker.UrlValidate(_url);
+            ConsoleColor.YellowColor("Checking if the url is valid.");
 
             // Checks the if the HttpStatusCode is 200 (OK).
-            bool urlCheckerBool = await UrlChecker.UrlCheck(_url);
+            bool urlCheckerBool = await UrlChecker.UrlStatusCheck(_url);
+            ConsoleColor.YellowColor("Checking if the website is status 200 (OK).");
 
             // if false
             if (!urlValidateBool || !urlCheckerBool)
                 return;
+
+            ConsoleColor.GreenColor("Done.");
 
             await StartCrawl();
         }

@@ -19,13 +19,23 @@ namespace NewWebCrawler
             _directoryPath = _trimmedPath + @"\SaveFiles";
             _filePath = _directoryPath + @"\Links.txt";
         }
-        public async Task SaveToFile()
+        public async Task SaveToFile(string text)
         {
             CheckDirAndFileExists();
 
             // Adding text to the file.
             using StreamWriter sw = new(_filePath, append: true);
-            await sw.WriteLineAsync("Test");
+            await sw.WriteLineAsync(text);
+        }
+
+        // TEST REMOVE AFTER!
+        public async Task SaveToSitemap(string text)
+        {
+            CheckDirAndFileExists();
+
+            // Adding text to the file.
+            using StreamWriter sw = new(_directoryPath + @"\Sitemaps.txt", append: true);
+            await sw.WriteLineAsync(text);
         }
 
         public void CheckDirAndFileExists()

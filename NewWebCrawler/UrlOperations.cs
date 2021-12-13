@@ -17,14 +17,16 @@ namespace NewWebCrawler
     // Regex.Split(url, @"([.])\b).ToList(); //
     // ------------------------------------- //
 
-    public class UrlChecker
+    public class UrlOperations
     {
-        static readonly HttpClient client = new();
-
-        public static bool UrlValidate(string url)
+        private HttpClient _client;
+        public UrlOperations()
         {
-            //ConsoleColor.YellowColor("Checking if the url is valid.");
+            _client = new();
+        }
 
+        public bool UrlValidate(string url)
+        {
             if (url == null || url.Length == 0)
             {
                 ConsoleColor.RedColor("NO URL FOUND!");
@@ -41,7 +43,6 @@ namespace NewWebCrawler
             // Checks if the extension isn't null and the extension lenght is greater than 0.
             if (getExtension != null && getExtension.Length > 0)
             {
-                //ConsoleColor.GreenColor("Done.");
                 return true;
             }
 
@@ -49,21 +50,18 @@ namespace NewWebCrawler
             return false;
         }
 
-        public static async Task<bool> UrlStatusCheck(string url)
+        public async Task<bool> UrlStatusCheckAsync(string url)
         {
-            //ConsoleColor.YellowColor("Checking if the website is status 200 (OK).");
             try
             {
                 // Checks if the HttpStatusCode is 200 (OK).
-                HttpResponseMessage responseMessage = await client.GetAsync(url);
+                HttpResponseMessage responseMessage = await _client.GetAsync(url);
                 if (responseMessage.StatusCode == HttpStatusCode.OK)
                 {
-                    //ConsoleColor.GreenColor("Done");
                     return true;
                 }
                 else
                 {
-                    ConsoleColor.RedColor("The website status is not 200 (OK).");
                     return false;
                 }
             }
@@ -73,5 +71,10 @@ namespace NewWebCrawler
                 return false;
             }
         }
+
+        //public static void LinkTrimmer(string url)
+        //{
+
+        //}
     }
 }

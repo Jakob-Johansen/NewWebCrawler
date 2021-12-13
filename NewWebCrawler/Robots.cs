@@ -85,9 +85,9 @@ namespace NewWebCrawler
             _xmlDoc.Load(link);
             var nodes = _xmlDoc.DocumentElement.ChildNodes;
 
-            foreach (XmlNode firstNode in nodes)
+            foreach (XmlNode fNode in nodes)
             {
-                foreach (XmlNode sNode in firstNode.ChildNodes)
+                foreach (XmlNode sNode in fNode.ChildNodes)
                 {
                     if (sNode.Name == "loc")
                     {

@@ -8,11 +8,10 @@ namespace NewWebCrawler
         // WebCrawler
         static async Task Main(string[] args)
         {
-            // Some websites to test on.
 
             // https://www.automobile.tn/
-            // https://www.apple.com/
             // https://www.proshop.dk/
+            // https://www.microsoft.com/
             // https://docs.microsoft.com/en-us/dotnet/csharp/programming-guide/classes-and-structs/using-constructors
 
             // Javascript side
@@ -21,6 +20,7 @@ namespace NewWebCrawler
             // Har sitemap
             // https://www.arla.dk/
             // https://www.microsoft.com/
+            // https://www.apple.com/
             // https://netto.dk/
             // https://www.foetex.dk/
             // https://www.bilka.dk/
@@ -32,8 +32,8 @@ namespace NewWebCrawler
             //Crawler crawler = new("https://www.proshop.dk/");
             //await crawler.StartProgram();
 
-            FileOperations fo = new();
-            await fo.SaveToFile();
+            Robots robots = new("https://www.komplett.dk");
+            await robots.CheckRobots();
         }
     }
 }
